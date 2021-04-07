@@ -5,12 +5,12 @@ const express = require('express');
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use('/static',express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const port = 3000
 
 app.get('/', (req, res) => {
-  res.render('index.ejs',{title: 'index'});
+  res.render('index',{title: 'Index'});
 });
 
 app.listen(port, () => {
