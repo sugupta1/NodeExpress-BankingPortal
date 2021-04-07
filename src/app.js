@@ -17,12 +17,24 @@ const users = JSON.parse(userData);
 
 
 app.get('/', (req, res) => {
-    res.locals = {title: 'account summary',accounts: accounts};
-    res.render('index',{title: 'Index'});
+    //res.locals = {title: 'account summary',accounts: accounts};
+    res.render('index',{title: 'Account summary', accounts});
 });
 
 app.get('/savings', (req, res) => {
     res.render('account',{account: accounts.savings});
+});
+
+app.get('/credit', (req, res) => {
+    res.render('account',{account: accounts.credit});
+});
+
+app.get('/checking', (req, res) => {
+    res.render('account',{account: accounts.checking});
+});
+
+app.get('/profile', (req, res) => {
+    res.render('profile',{user: user[0]});
 });
 
 app.listen(port, () => {
