@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
+const { title } = require('process');
 
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
@@ -14,8 +15,13 @@ const accounts = JSON.parse(accountData);
 const userData = fs.readFileSync(src/json/users.json,{encoding: 'utf8'});
 const users = JSON.parse(userData);
 
+
 app.get('/', (req, res) => {
-  res.render('index',{title: 'Index'});
+    res.locals = {title: 'account summary',accounts: accounts};
+    res.render('index',{title: 'Index'});
+});
+app.get('/savings', (req, res) => {
+    res.render('account',{account: accounts.savings});
 });
 
 app.listen(port, () => {
