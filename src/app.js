@@ -4,16 +4,15 @@ const express = require('express');
 
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
-console.log(__dirname);
 app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/static',express.static(path.join(__dirname, 'public')));
 
 const port = 3000
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  res.render('index.ejs',{title: 'index'});
+});
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+  console.log('PS Project Running on port 3000!')
+});
