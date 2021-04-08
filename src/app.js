@@ -42,9 +42,7 @@ app.get('/profile', (req, res) => {
     res.render('profile',{user: users[0]});
 });
 
-app.get('/transfer', (req, res) => {
-    res.render('transfer');
-});
+app.get('/transfer', (req, res) => res.render('transfer'));
 
 app.post('/transfer', (req, res) => {
     accounts[req.body.from].balance -= req.body.amount;
