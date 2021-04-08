@@ -9,6 +9,8 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.urlencoded({extended: true}));
+
 const port = 3000
 
 const accountData = fs.readFileSync(path.join(__dirname,'json', 'accounts.json'), 'utf8');
@@ -45,8 +47,11 @@ app.get('/transfer', (req, res) => {
 });
 
 app.post('/transfer',(req,res) =>{
-    let savBal = req.accounts['saving'].balance;
-    
+    accounts[req.body.from].balance = accounts[req.body.from].balance - req.body.amount;
+    accounts[req.body.to].balance = parseInt(accounts[req.body.to].balance) + parseInt(req.body.amount , 10);
+    const accountsJson = JSON.stringify(accounts,null,4);
+    fs.writeFileSync(path.join(__dirname,'json/accounts.json'), accountsJson,'utf8');
+    res.render('tranfer',{message: 'Transfer completed'});
 });
 
 app.listen(port, () => {
