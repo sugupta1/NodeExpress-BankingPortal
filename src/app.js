@@ -40,6 +40,15 @@ app.get('/profile', (req, res) => {
     res.render('profile',{user: users[0]});
 });
 
+app.get('/transfer', (req, res) => {
+    res.render('transfer');
+});
+
+app.post('/transfer',(req,res) =>{
+    let savBal = req.accounts['saving'].balance;
+    
+});
+
 app.listen(port, () => {
   console.log('PS Project Running on port 3000!')
 });
