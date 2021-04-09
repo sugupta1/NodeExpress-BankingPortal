@@ -24,25 +24,6 @@ app.get('/profile', (req, res) => {
     res.render('profile',{user: users[0]});
 });
 
-app.get('/transfer', (req, res) => res.render('transfer'));
-
-app.post('/transfer', (req, res) => {
-    accounts[req.body.from].balance -= req.body.amount;
-    accounts[req.body.to].balance += parseInt(req.body.amount, 10);
-    writeJSON();
-    res.render('transfer', {message: 'Transfer Completed'});
-});
-
-app.get('/payment', (req, res) =>{
-    res.render('payment' , {account: accounts.credit });
-});
-
-app.post('/payment', (req, res) => {
-    accounts.credit.balance -= req.body.amount;
-    accounts.credit.available += parseInt(req.body.amount);
-    writeJSON();
-    res.render('payment', {message: 'Payment Successful', account: accounts.credit});
-});
 app.listen(port, () => {
   console.log('PS Project Running on port 3000!')
 });
